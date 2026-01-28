@@ -1,0 +1,341 @@
+/* ==================== GENERAL STYLING ==================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ==================== BACKGROUND ==================== */
+body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ==================== FONTS ==================== */
+h1 {
+    font-family: 'Georgia', serif;
+    font-size: 3em;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-family: 'Arial', sans-serif;
+    font-size: 1.8em;
+    color: #f0f0f0;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-style: italic;
+}
+
+p, li {
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 1em;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* ==================== CONTAINER & LAYOUT ==================== */
+.container {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* ==================== CSS3 SELECTORS ==================== */
+/* Attribute Selector */
+input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 2px solid #667eea;
+    border-radius: 8px;
+    font-size: 1em;
+    transition: all 0.3s ease;
+}
+
+/* Attribute Selector with Pseudo-class */
+input[type="text"]:focus {
+    outline: none;
+    border-color: #764ba2;
+    box-shadow: 0 0 10px rgba(118, 75, 162, 0.5);
+}
+
+/* Child Selector */
+.container > h1::first-letter {
+    color: #764ba2;
+    font-size: 1.2em;
+}
+
+/* Descendant Selector */
+.section p {
+    margin-bottom: 10px;
+}
+
+/* ==================== PSEUDO CLASSES ==================== */
+button {
+    background: linear-gradient(to right, #667eea, #764ba2);
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    margin: 10px 5px 10px 0;
+}
+
+/* Hover Pseudo-class */
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+    background: linear-gradient(to right, #764ba2, #667eea);
+}
+
+/* Active Pseudo-class */
+button:active {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 10px rgba(102, 126, 234, 0.4);
+}
+
+/* Focus Pseudo-class */
+button:focus {
+    outline: 3px solid rgba(102, 126, 234, 0.5);
+}
+
+/* ==================== LISTS ==================== */
+.section {
+    margin: 20px 0;
+}
+
+/* Unordered List Styling */
+ul {
+    list-style-type: none;
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+/* Pseudo Element for List Items */
+ul > li::before {
+    content: "🎬 ";
+    color: #764ba2;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+/* Nth-child Pseudo-class */
+ul > li:nth-child(odd) {
+    background-color: #f9f9f9;
+    padding: 8px 12px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+ul > li:nth-child(even) {
+    background-color: #f0f0f0;
+    padding: 8px 12px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+/* Hover effect on list items */
+ul > li:hover {
+    background-color: #e8d5f2;
+    transform: translateX(10px);
+    transition: all 0.3s ease;
+}
+
+/* First-child Pseudo-class */
+ul > li:first-child {
+    font-weight: bold;
+    color: #667eea;
+    border-left: 4px solid #667eea;
+    padding-left: 16px;
+}
+
+/* Last-child Pseudo-class */
+ul > li:last-child {
+    border-bottom: 2px solid #764ba2;
+    padding-bottom: 10px;
+}
+
+/* Ordered List */
+ol {
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+ol > li {
+    margin-bottom: 8px;
+    color: #333;
+}
+
+ol > li::marker {
+    color: #764ba2;
+    font-weight: bold;
+}
+
+/* ==================== TABLES ==================== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Table Header */
+thead {
+    background: linear-gradient(to right, #667eea, #764ba2);
+    color: white;
+}
+
+th {
+    padding: 15px;
+    text-align: left;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+/* Table Body */
+td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Nth-child for Table Rows */
+tbody > tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+tbody > tr:nth-child(even) {
+    background-color: #f0f0f0;
+}
+
+/* Hover effect on table rows */
+tbody > tr:hover {
+    background-color: #e8d5f2;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+/* Last row styling */
+tbody > tr:last-child > td {
+    border-bottom: 2px solid #764ba2;
+}
+
+/* ==================== PSEUDO ELEMENTS ==================== */
+.section::before {
+    content: "★";
+    color: #764ba2;
+    font-size: 1.5em;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+/* ::after Pseudo-element */
+.section::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, #667eea, transparent);
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+/* ::first-line Pseudo-element */
+.description::first-line {
+    font-weight: bold;
+    color: #667eea;
+    text-decoration: underline;
+}
+
+/* ::first-letter Pseudo-element */
+.description::first-letter {
+    font-size: 1.5em;
+    color: #764ba2;
+    font-weight: bold;
+}
+
+.description {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-left: 4px solid #667eea;
+    margin: 15px 0;
+    border-radius: 5px;
+    line-height: 1.8;
+}
+
+/* ==================== ADDITIONAL STYLING ==================== */
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+/* Empty state */
+.empty::after {
+    content: " - No movies found";
+    color: #999;
+    font-style: italic;
+}
+
+/* Status indicator using pseudo-elements */
+.status {
+    position: relative;
+    padding-left: 25px;
+}
+
+.status.active::before {
+    content: "●";
+    position: absolute;
+    left: 0;
+    color: #4caf50;
+    font-size: 1.2em;
+}
+
+.status.inactive::before {
+    content: "●";
+    position: absolute;
+    left: 0;
+    color: #f44336;
+    font-size: 1.2em;
+}
+
+/* Link styling */
+a {
+    color: #667eea;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+a:hover {
+    color: #764ba2;
+}
+
+a::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #764ba2;
+    transition: width 0.3s ease;
+}
+
+a:hover::after {
+    width: 100%;
+}
