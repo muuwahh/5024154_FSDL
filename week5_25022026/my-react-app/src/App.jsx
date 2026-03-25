@@ -4,6 +4,7 @@ import Events from "./pages/Events";
 import Booking from "./pages/Booking";
 import Payment from "./pages/Payment";
 import Success from "./pages/Success";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
