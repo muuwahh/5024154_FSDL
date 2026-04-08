@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>vibeTix — Advanced Booking</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+body {
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: white;
+  font-family: Arial;
+}
+
+.card-custom {
+  background: #1e293b;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.poster {
+  max-width: 180px;
+}
+
+.output {
+  background: black;
+  color: #00ffcc;
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container text-center mt-4">
+  <h1>🎟 vibeTix</h1>
+</div>
+
+<div class="container text-center">
+  <img src="https://i.pinimg.com/1200x/0c/f6/8f/0cf68f435e83ea0376f0b21c1273f37d.jpg" class="poster">
+</div>
+
+<div class="container mt-4">
+  <div class="card-custom mx-auto" style="max-width:400px;">
+
+    <form onsubmit="handleBooking(event)">
+      <input id="name" class="form-control mb-2" placeholder="Name">
+      <input id="email" class="form-control mb-2" placeholder="Email">
+
+      <select id="event" class="form-control mb-2">
+        <option value="">Select Event</option>
+        <option value="Concert">Concert</option>
+        <option value="DJ">DJ Night</option>
+        <option value="Fest">Fest</option>
+      </select>
+
+      <input id="tickets" type="number" class="form-control mb-3" placeholder="Tickets">
+
+      <button class="btn btn-info w-100">Book</button>
+    </form>
+
+    <div id="output" class="output"></div>
+
+    <!-- QR -->
+    <div id="qr" class="text-center mt-3"></div>
+
+  </div>
+</div>
+
+<!-- QR Library -->
+<script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+
+<script>
+
+// ARRAY
+let events = ["Concert", "DJ", "Fest"];
+
+// OBJECT
+let prices = {
+  Concert: 1000,
+  DJ: 800,
+  Fest: 500
+};
+
+// MAIN FUNCTION
+function handleBooking(e) {
+  e.preventDefault();
+
+  try {
+
+    let name = document.getElementById("name").value.trim().toUpperCase();
+    let email = document.getElementById("email").value;
+    let event = document.getElementById("event").value;
+    let tickets = parseInt(document.getElementById("tickets").value);
+
+    // VALIDATION
+    if (!name || !email || !event || isNaN(tickets)) {
+      throw "Fill all fields!";
+    }
+
+    if (!email.includes("@")) {
+      throw "Invalid Email!";
+    }
+
+    if (tickets <= 0) {
+      throw "Tickets must be greater than 0";
+    }
+
+    // CALCULATION
+    let total = prices[event] * tickets;
+
+    // DATE
+    let date = new Date().toLocaleString();
+
+    // LOOP
+    let msg = `✅ Booking Confirmed for <b>${name}</b><br><br>`;
+    for (let i = 1; i <= tickets; i++) {
+      msg += `🎟 Ticket ${i} - ${event}<br>`;
+    }
+
+    msg += `<br>💰 Total: ₹${total}`;
+    msg += `<br>📅 Date: ${date}`;
+
+    // SAVE TO LOCAL STORAGE (NEW)
+    localStorage.setItem("booking", msg);
+
+    document.getElementById("output").innerHTML = msg;
+
+    // QR CODE (NEW FEATURE)
+    QRCode.toCanvas(document.createElement('canvas'), msg, function (err, canvas) {
+      if (!err) {
+        document.getElementById("qr").innerHTML = "<p>Scan QR:</p>";
+        document.getElementById("qr").appendChild(canvas);
+      }
+    });
+
+    // SHOW CONCEPTS
+    document.getElementById("output").innerHTML += `
+    <br><br><b>Concepts Used:</b><br>
+    ✔ Array<br>
+    ✔ Object<br>
+    ✔ String<br>
+    ✔ Validation<br>
+    ✔ Error Handling<br>
+    ✔ Date<br>
+    ✔ Local Storage<br>
+    ✔ QR Code`;
+
+  } catch (error) {
+    alert(error);
+  }
+}
+
+</script>
+
+</body>
+</html>
