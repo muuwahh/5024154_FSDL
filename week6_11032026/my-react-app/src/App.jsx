@@ -1,38 +1,103 @@
-function App() {
+import { useState, useEffect } from "react";
 
-  const workouts = [
-    "🏃 Running",
-    "💪 Gym Workout",
-    "🧘 Yoga",
-    "🚴 Cycling"
-  ];
+function App() {
+  const workouts = ["🏃 Running", "💪 Gym Workout", "🧘 Yoga", "🚴 Cycling"];
+
+  const [selected, setSelected] = useState(null);
+  const [time, setTime] = useState(0);
+  const [running, setRunning] = useState(false);
+
+  // ⏱ Timer logic
+  useEffect(() => {
+    let interval;
+
+    if (running) {
+      interval = setInterval(() => {
+        setTime((prev) => prev + 1);
+      }, 1000);
+    }
+
+    return () => clearInterval(interval);
+  }, [running]);
+
+  // Format time (mm:ss)
+  const formatTime = (t) => {
+    const min = String(Math.floor(t / 60)).padStart(2, "0");
+    const sec = String(t % 60).padStart(2, "0");
+    return `${min}:${sec}`;
+  };
 
   return (
     <div style={styles.body}>
-
       <div style={styles.card}>
         <h1 style={styles.title}>💪 FitTrack</h1>
-        <p style={styles.subtitle}>Track Your Daily Fitness</p>
+        <p style={styles.subtitle}>Track Your Fitness</p>
 
-        <h3 style={{marginTop: "20px"}}>Today's Activities:</h3>
+        {!selected && (
+          <>
+            <h3>Select Workout:</h3>
+            <ul style={styles.list}>
+              {workouts.map((w, i) => (
+                <li
+                  key={i}
+                  style={styles.item}
+                  onClick={() => {
+                    setSelected(w);
+                    setTime(0);
+                    setRunning(false);
+                  }}
+                >
+                  {w}
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
 
-        <ul style={styles.list}>
-          {workouts.map((w, i) => (
-            <li key={i} style={styles.item}>{w}</li>
-          ))}
-        </ul>
+        {selected && (
+          <>
+            <h2>{selected}</h2>
+            <h1>{formatTime(time)}</h1>
 
-        <button style={styles.button}
-          onClick={() => alert("Workout Started 🚀")}>
-          Start Workout
-        </button>
+            <div style={{ marginTop: "15px" }}>
+              <button
+                style={styles.button}
+                onClick={() => setRunning(true)}
+              >
+                ▶ Start
+              </button>
+
+              <button
+                style={styles.button}
+                onClick={() => setRunning(false)}
+              >
+                ⏸ Stop
+              </button>
+
+              <button
+                style={styles.button}
+                onClick={() => {
+                  setTime(0);
+                  setRunning(false);
+                }}
+              >
+                🔄 Reset
+              </button>
+            </div>
+
+            <button
+              style={{ ...styles.button, marginTop: "15px" }}
+              onClick={() => setSelected(null)}
+            >
+              ⬅ Back
+            </button>
+          </>
+        )}
       </div>
-
     </div>
   );
 }
 
-// 🔥 PREMIUM CSS (INLINE STYLE)
 const styles = {
   body: {
     height: "100vh",
@@ -40,8 +105,8 @@ const styles = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    fontFamily: "Poppins, sans-serif",
-    color: "white"
+    color: "white",
+    fontFamily: "sans-serif"
   },
 
   card: {
@@ -49,14 +114,12 @@ const styles = {
     padding: "30px",
     borderRadius: "20px",
     textAlign: "center",
-    width: "300px",
-    boxShadow: "0 10px 30px rgba(0,0,0,0.5)",
-    backdropFilter: "blur(10px)"
+    width: "320px",
+    boxShadow: "0 10px 30px rgba(0,0,0,0.5)"
   },
 
   title: {
-    color: "#00eaff",
-    fontWeight: "700"
+    color: "#00eaff"
   },
 
   subtitle: {
@@ -72,17 +135,16 @@ const styles = {
     padding: "10px",
     margin: "8px 0",
     background: "rgba(255,255,255,0.1)",
-    borderRadius: "10px"
+    borderRadius: "10px",
+    cursor: "pointer"
   },
 
   button: {
-    marginTop: "15px",
-    padding: "10px 20px",
+    margin: "5px",
+    padding: "10px 15px",
     border: "none",
     borderRadius: "10px",
-    background: "linear-gradient(45deg, #00eaff, #0077ff)",
-    color: "white",
-    fontWeight: "600",
+    background: "#00eaff",
     cursor: "pointer"
   }
 };
